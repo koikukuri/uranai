@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>新潟5大ラーメン占い</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e3f2fd; /* 淡い青 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #4a4a4a;
+    line-height: 1.6;
+  }
+  .container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 35px 45px;
+    max-width: 650px;
+    width: 90%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  h1 {
+    color: #1976d2;
+    margin-bottom: 25px;
+    font-size: 2.4em;
+    font-weight: 700;
+  }
+  .question-section {
+    margin-bottom: 30px;
+    text-align: left;
+  }
+  .question-section p {
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  .question-section label {
+    display: block;
+    background-color: #e0f2f7;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: 1px solid #81d4fa;
+  }
+  .question-section label:hover {
+    background-color: #b3e5fc;
+    transform: translateY(-2px);
+  }
+  .question-section input[type="radio"] {
+    margin-right: 12px;
+    transform: scale(1.2);
+  }
+  button {
+    background-color: #03a9f4;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.3em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
+    margin-top: 20px;
+  }
+  button:hover {
+    background-color: #0288d1;
+    transform: translateY(-2px);
+  }
+  #result {
+    margin-top: 30px;
+    font-size: 1.3em;
+    font-weight: 500;
+    color: #d32f2f;
+    background-color: #ffebee;
+    border: 2px dashed #ff8a80;
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+  }
+  #resultType {
+    font-size: 1.7em;
+    font-weight: 700;
+    color: #c62828;
+    margin-bottom: 10px;
+  }
+  #compatibleType { /* 新しく追加 */
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #4CAF50; /* 緑色 */
+    margin-top: 15px;
+  }
+  #roomAssignment { /* 新しく追加 */
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+  }
+  .red-room {
+    background-color: #e57373; /* 赤系 */
+  }
+  .blue-room {
+    background-color: #64b5f6; /* 青系 */
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🍜 新潟5大ラーメン占い 🍜</h1>
+
+  <div class="question-section">
+    <p>Q1: 新潟5大ラーメンの中で、あなたが一番「これだ！」と思うのは？</p>
+    <label>
+      <input type="radio" name="q1" value="assari_shoyu"> 煮干し香る透明スープ！新潟あっさり醤油ラーメン
+    </label>
+    <label>
+      <input type="radio" name="q1" value="noukou_miso"> 割りスープで自分好みに！新潟濃厚味噌ラーメン
+    </label>
+    <label>
+      <input type="radio" name="q1" value="shoga_shoyu"> 身体も心もポカポカ！長岡生姜醤油ラーメン
+    </label>
+    <label>
+      <input type="radio" name="q1" value="tsubamesanjo_seabura"> 背脂たっぷり中毒性！燕三条系背脂ラーメン
+    </label>
+    <label>
+      <input type="radio" name="q1" value="sanjo_curry"> 個性派の一杯！三条カレーラーメン
+    </label>
+  </div>
+
+  <button onclick="diagnose()">診断する！</button>
+
+  <div id="result">
+    <div id="resultType"></div>
+    <div id="resultDescription"></div>
+    <div id="compatibleType"></div> <div id="roomAssignment"></div> </div>
+</div>
+
+<script>
+  function diagnose() {
+    const q1 = document.querySelector('input[name="q1"]:checked');
+
+    if (!q1) {
+      alert("ラーメンを選んでください！");
+      return;
+    }
+
+    const type = q1.value;
+    let resultType = "";
+    let resultDescription = "";
+    let compatibleType = ""; // 相性の良いタイプ
+    let room = ""; // 部屋の指示 (red_room / blue_room)
+
+    switch (type) {
+      case "assari_shoyu":
+        resultType = "🐠 あっさり醤油タイプ 🐠";
+        resultDescription = "あなたは**控えめながらも芯の強さを持つ、繊細なタイプ**です。誰にでも優しく、周りに安心感を与えます。急がず、じっくりと関係を深めることで、本質的な出会いへと繋がるでしょう。";
+        compatibleType = "相性の良い人は、あなたの情熱を引き出してくれる**濃厚味噌タイプ**の人です！";
+        room = "red_room";
+        break;
+      case "noukou_miso":
+        resultType = "💪 濃厚味噌タイプ 💪";
+        resultDescription = "あなたは**情熱的でパワフル、一度決めたらとことん突き進むリーダーシップのあるタイプ**です。面倒見が良く、周囲を巻き込む力があります。時には強引な一面もありますが、その情熱が魅力です。";
+        compatibleType = "相性の良い人は、あなたの情熱を受け止めてくれる**あっさり醤油タイプ**の人です！";
+        room = "blue_room";
+        break;
+      case "shoga_shoyu":
+        resultType = "♨️ 生姜醤油の温かみタイプ ♨️";
+        resultDescription = "あなたは**温かく、人の心を癒すような包容力を持つ、思いやり深いタイプ**です。常に相手を気遣い、細やかな気配りができます。周りからは頼られる存在ですが、自分自身のことも大切に。";
+        compatibleType = "相性の良い人は、あなたの優しさに惹かれる**燕三条系背脂タイプ**の人です！";
+        room = "red_room";
+        break;
+      case "tsubamesanjo_seabura":
+        resultType = "🔩 燕三条系背脂タイプ 🔩";
+        resultDescription = "あなたは**見た目とは裏腹に、意外と繊細な一面も持つ職人気質タイプ**です。自分のこだわりを大切にし、一度心を開くと深く長く付き合う傾向があります。";
+        compatibleType = "相性の良い人は、あなたの個性を理解し、温かく見守ってくれる**生姜醤油タイプ**の人です！";
+        room = "blue_room";
+        break;
+      case "sanjo_curry":
+        resultType = "🍛 三条カレーラーメンタイプ 🍛";
+        resultDescription = "あなたは**個性的でユニーク、常に新しいことに興味を持つ探求心旺盛なタイプ**です。既存の枠にとらわれない自由な発想を持ち、周囲を驚かせることがあります。";
+        compatibleType = "相性の良い人は、あなたのユニークな魅力を共に楽しめる**濃厚味噌タイプ**または**燕三条系背脂タイプ**の人です！";
+        room = "blue_room"; // カレーラーメンは青い部屋に割り当て
+        break;
+      default:
+        resultType = "診断できませんでした";
+        resultDescription = "ラーメンを選んで再度お試しください。";
+        compatibleType = "";
+        room = "";
+    }
+
+    document.getElementById("resultType").innerText = resultType;
+    document.getElementById("resultDescription").innerText = resultDescription;
+    document.getElementById("compatibleType").innerText = compatibleType; // 相性の良いタイプを表示
+
+    const roomAssignmentElement = document.getElementById("roomAssignment");
+    roomAssignmentElement.innerText = `あなたは${room === "red_room" ? "赤い部屋" : "青い部屋"}へどうぞ！`;
+    roomAssignmentElement.className = room === "red_room" ? "red-room" : "blue-room"; // CSSクラスを適用
+    
+    document.getElementById("result").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
